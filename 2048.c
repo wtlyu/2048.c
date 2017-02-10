@@ -70,16 +70,16 @@ void printLine7(const char* begin, const char* content0, const char* content1, c
 }
 
 void printLine7i(const char* begin, const int content0, const int content1, const int content2, const int content3, const char* border, const char* end) {
-	char bufferPerBlock0[6] = "";
+	char bufferPerBlock0[7] = "";
 	map2str(content0, bufferPerBlock0);
 
-	char bufferPerBlock1[6] = "";
+	char bufferPerBlock1[7] = "";
 	map2str(content1, bufferPerBlock1);
 
-	char bufferPerBlock2[6] = "";
+	char bufferPerBlock2[7] = "";
 	map2str(content2, bufferPerBlock2);
 
-	char bufferPerBlock3[6] = "";
+	char bufferPerBlock3[7] = "";
 	map2str(content3, bufferPerBlock3);
 
 	printLine7(begin, bufferPerBlock0, bufferPerBlock1, bufferPerBlock2, bufferPerBlock3, border, end);
