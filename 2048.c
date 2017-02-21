@@ -139,7 +139,7 @@ void operation(int* elmt0, int* elmt1, int* elmt2, int* elmt3) {
 	char skipFlag = 0;
 	for (int i = 0; i < 4; ++i) {
 		if (*map[i] != 0) {
-			if ((!skipFlag) && (i > 0) && (*map[preBlank - 1] == *map[i])) {
+			if ((!skipFlag) && (preBlank > 0) && (*map[preBlank - 1] == *map[i])) {
 				(*map[i])++;
 				*map[preBlank - 1] = 0;
 				gameStatus.score += 1 << *(map[i]);
