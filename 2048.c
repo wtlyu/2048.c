@@ -51,8 +51,8 @@ void printLine1(const char* content) {
 }
 
 void printLine3(const char* begin, const char* content, const char* end) {
-	char buffer[98] = "";
-	sprintf(buffer, "        %s%s%s ", begin, content, end);
+	char buffer[148] = "";
+	sprintf(buffer, "               %s%s%s ", begin, content, end);
 
 	printLine1(buffer);
 }
@@ -129,7 +129,7 @@ void printScore() {
 
 void printHelp() {
 	printLine1("");
-	printLine1("\033[7m ↑↓←→ \033[0m move the tiles   \033[7m Ctrl + N \033[0m start new game");
+	printLine1("\033[7m ↑↓←→ / WASD / HJKL \033[0m move the tiles   \033[7m Ctrl + N \033[0m start new game");
 }
 
 void operation(int* elmt0, int* elmt1, int* elmt2, int* elmt3) {
@@ -216,7 +216,7 @@ void render(char flush) {
 		}
 		printf("\r");
 	} else {
-		printLine1("          ___   ____  __ __  ____\n\r         |__ \\ / __ \\/ // / ( __ ) _____\n\r         __/ // / / / // /_/ __  |/ ___/\n\r        / __// /_/ /__  __/ /_/ // /__\n\r       /____/\\____/  /_/  \\____(_)___/\n\r");
+		printLine1("                 ___   ____  __ __  ____\n\r                |__ \\ / __ \\/ // / ( __ ) _____\n\r                __/ // / / / // /_/ __  |/ ___/\n\r               / __// /_/ /__  __/ /_/ // /__\n\r              /____/\\____/  /_/  \\____(_)___/\n\r");
 	}
 
 	randomAdd();
@@ -248,6 +248,38 @@ int main() {
 			render(1);
 		}
 		// printf("%d\n", ch);
+
+		switch(ch) { // check for wasd
+			case 'w':
+			case 'W':
+			case 'k':
+			case 'K':
+				// code for arrow up
+				turn(0);
+				break;
+			case 's':
+			case 'S':
+			case 'j':
+			case 'J':
+				// code for arrow down
+				turn(1);
+				break;
+			case 'd':
+			case 'D':
+			case 'l':
+			case 'L':
+				// code for arrow right
+				turn(2);
+				break;
+			case 'a':
+			case 'A':
+			case 'h':
+			case 'H':
+				// code for arrow left
+				turn(3);
+				break;
+		}
+
 		if (ch == '\033') { // if the first value is esc
 			_getch(); // skip the [
 			switch(_getch()) { // the real value
@@ -268,10 +300,10 @@ int main() {
 					turn(3);
 					break;
 			}
-			if (gameStatus.moveFlag != 0) {
-				gameStatus.moveFlag = 0;
-				render(1);
-			}
+		}
+		if (gameStatus.moveFlag != 0) {
+			gameStatus.moveFlag = 0;
+			render(1);
 		}
 	}
 
