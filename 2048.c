@@ -2,7 +2,12 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-#include <ncurses.h>
+
+#ifdef _MSC_VER
+#include <conio.h>
+#else
+extern char _getch(void);
+#endif
 
 typedef struct $ {
 	int map[4][4];
@@ -227,12 +232,6 @@ void render(char flush) {
 }
 
 int main() {
-	SCREEN *s = newterm(NULL, stdin, stdout);
-	noecho();
-	cbreak();	/* Line buffering disabled. pass on everything */
-	raw();
-	keypad(stdscr, TRUE);
-
 	init();
 	render(0);
 
@@ -240,7 +239,7 @@ int main() {
 
 	while (1)
 	{
-		ch = getch();
+		ch = _getch();
 		if ((ch == 'Q') || (ch == 'q') || (ch == 3) || (ch == 4)) break;
 		if (ch == 14) {
 			init();
@@ -248,8 +247,8 @@ int main() {
 		}
 		// printf("%d\n", ch);
 		if (ch == '\033') { // if the first value is esc
-			getch(); // skip the [
-			switch(getch()) { // the real value
+			_getch(); // skip the [
+			switch(_getch()) { // the real value
 				case 'A':
 					// code for arrow up
 					turn(0);
@@ -275,8 +274,6 @@ int main() {
 	}
 
 	printLine1("Bye");
-
-	endwin();
 
 	return 0;
 }

@@ -10,6 +10,21 @@ make
 make install
 ```
 
+## For Windows
+
+Please replace the first section in Makefile with this:
+
+```
+2048.exe: 2048.c
+	cl /nologo 2048.c
+```
+
+then run
+
+```
+make
+```
+
 # Run
 ```
 2048
@@ -28,3 +43,7 @@ see LICENSE
 
 # Maintainer
 * eastpiger
+
+# Acknowledgement
+
+Special thanks to blakemcbride's project [Drill](https://github.com/blakemcbride/Drill).

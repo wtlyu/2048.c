@@ -1,5 +1,5 @@
-2048: 2048.c
-	gcc 2048.c -lncurses -o 2048
+2048: 2048.c getch.c
+	clang 2048.c getch.c -o 2048
 
 install:
 	sudo install -m 755 2048 /usr/local/bin
