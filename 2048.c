@@ -136,17 +136,19 @@ void operation(int* elmt0, int* elmt1, int* elmt2, int* elmt3) {
 	int* map[4] = {elmt0, elmt1, elmt2, elmt3};
 
 	int preBlank = 0;
+	char skipFlag = 0;
 	for (int i = 0; i < 4; ++i) {
 		if (*map[i] != 0) {
-			if ((i < 3) && (*map[i] == *map[i + 1])) {
+			if ((!skipFlag) && (i > 0) && (*map[preBlank - 1] == *map[i])) {
 				(*map[i])++;
-				*map[i + 1] = 0;
+				*map[preBlank - 1] = 0;
 				gameStatus.score += 1 << *(map[i]);
-				gameStatus.moveFlag = 1;
+				preBlank--;
+				skipFlag = 1;
 				gameStatus.restTiles++;
 				if (*map[i] == 2048)
 					gameStatus.status = 1;
-			}
+			} else skipFlag = 0;
 			if (preBlank != i) gameStatus.moveFlag = 1;
 			int t = *(map[i]);
 			*map[i] = 0;
